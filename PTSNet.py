@@ -46,7 +46,6 @@ class PTSNet(nn.Module):
         self.conv4_x = encoder.layer3  # 1/16
         self.conv5_x = encoder.layer4  # 1/32
 
-        self.decoder = MDPM(self.out_channels[4], self.out_channels[4], BatchNorm) #
 
         self.down2 = conv_block(self.out_channels[-4], self.out_channels[1], 3, 1, 1, 1, 1, bn_act=True)
         self.down3 = conv_block(self.out_channels[-3], self.out_channels[2], 3, 1, 1, 1, 1, bn_act=True)
