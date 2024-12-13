@@ -159,6 +159,9 @@ class QKVAttention(nn.Module):
         # Compute affinity matrix
         affinity_matrix = torch.matmul(Q, K)  # [B, H*W, H*W]
 
+         # Apply softmax to affinity matrix
+        affinity_matrix = torch.softmax(affinity_matrix, dim=-1)  # Normalize along the last dimension (H*W)
+
         # Apply sparsity mask
         topk = int(self.sparsity * affinity_matrix.size(1))  # Number of top elements to keep
         values, indices = torch.topk(affinity_matrix, topk, dim=-1, largest=True, sorted=False)
